@@ -27,6 +27,8 @@ int main()
     float average;
     char repeat;
     
+    printf("Welcome to Historama!!!\n\n");
+    
     do
     {
         //      I.  Prompt user for ten integers from 1 to 30 one at a time
@@ -78,9 +80,11 @@ int main()
         print_ave(average);
 
         //          c.  Repeat if user requests
-        printf("Would you like to repeat the program? (Y/N)");
+        printf("Would you like to repeat the program? (Y/N) ");
         scanf("%c", &repeat);
         getchar();
+        
+        putchar('\n');
     }
     while (repeat == 'y' || repeat == 'Y');
     
@@ -93,13 +97,22 @@ int main()
 //              Return the integer value to main()
 int prompt()
 {
-    int value;
+    int value = 0;
+    int flag = 0;
     static int n = 1;
     
     //prompt
-    printf("Please enter value #%d (from 1 to 30 inclusive): ", n);
-    scanf("%d", &value);
-    getchar();
+    do
+    {
+        if (flag == 0)
+            printf("Please enter value #%d (from 1 to 30 inclusive): ", n);
+        else
+            printf("I'm sorry, that's not a valid input. Try again: ");
+        scanf("%d", &value);
+        flag = 1;
+        getchar();
+    }
+    while (value < 1 || value > 30);
     
     //increment counter
     n++;
@@ -125,14 +138,18 @@ void print_histo(int value)
     static int row = 1;
     
     //print the left column
-    printf("%-10d\t", row);
+    printf("%5d\t", row);
     //print stars
     for(k = 1; k <= value; k++)
     {
         putchar('*');
     }
     putchar('\n');
-    row++;
+    
+    if (row < 10)
+        row++;
+    else
+        row = 1;
 }
 
 //          b.  Pass the float average                                  *FUNCTION*
@@ -142,7 +159,7 @@ void print_ave(float ave)
     int k;
     
     //print the left column
-    printf("%-10.2f\t", ave);
+    printf("%5.2f\t", ave);
     //print the stars
     for(k = 1; k <= ave + 0.5; k++)
     {
@@ -150,6 +167,9 @@ void print_ave(float ave)
     }
     putchar('\n');
     printf("Last value is the mean of the numbers.\n");
+    
+    if (k == 10)
+        k = 1;
 }
 
 
