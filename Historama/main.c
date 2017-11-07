@@ -78,7 +78,9 @@ int main()
         print_ave(average);
 
         //          c.  Repeat if user requests
-        
+        printf("Would you like to repeat the program? (Y/N)");
+        scanf("%c", &repeat);
+        getchar();
     }
     while (repeat == 'y' || repeat == 'Y');
     
@@ -124,6 +126,7 @@ void print_histo(int value)
     
     //print the left column
     printf("%-10d\t", row);
+    //print stars
     for(k = 1; k <= value; k++)
     {
         putchar('*');
