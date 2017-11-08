@@ -23,7 +23,7 @@ int main()
 {
     //  2.  Variable declarations
     int num1, num2, num3, num4, num5, num6, num7, num8, num9, num10;
-    int sum = 0;
+    int sum;
     float average;
     char repeat;
     
@@ -31,6 +31,8 @@ int main()
     
     do
     {
+        sum = 0;
+        
         //      I.  Prompt user for ten integers from 1 to 30 one at a time
         //          b.  Add value to sum
         num1 = prompt();
@@ -66,7 +68,7 @@ int main()
         //  Calculate the average for the ten values
         average = calc_ave(sum);
         
-        //      III.Print the Histogram and the average.
+        //  III.Print the Histogram and the average.
         print_histo(num1);
         print_histo(num2);
         print_histo(num3);
@@ -79,7 +81,7 @@ int main()
         print_histo(num10);
         print_ave(average);
 
-        //          c.  Repeat if user requests
+        //  c.  Repeat if user requests
         printf("Would you like to repeat the program? (Y/N) ");
         scanf("%c", &repeat);
         getchar();
@@ -114,8 +116,11 @@ int prompt()
     }
     while (value < 1 || value > 30);
     
-    //increment counter
-    n++;
+    //increment counter if necessary, if not reset
+    if (n < 10)
+        n++;
+    else
+        n = 1;
     
     return value;
 }
